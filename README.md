@@ -131,7 +131,7 @@ tcpdump -i enp0s3 port 22 -c 5 -n
  tcpdump -i emp0s3 dst 192.168.100.1
 ```
 
-#### 4. THAM KHẢO
+### 3. THAM KHẢO
 
 - https://vinahost.vn/ac/knowledgebase/248/TCPDUMP-va-cac-th-thut-s-dng.html
 - http://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/
