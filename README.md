@@ -28,7 +28,13 @@ yum install tcpdump -y
 
 #### 2.2 Một vài lệnh cơ bản
 
-##### a. Bắt gói tin trên Interface
+##### a. Xem các Interface đang hoạt động
+
+```
+tcpdump -D
+```
+
+##### b. Bắt gói tin trên Interface
 
 ```
 tcpdump -i <INTERFACE>
@@ -62,7 +68,7 @@ ACK | Mô tả số sequence number tiếp theo của gói tin do bên gửi tru
 Window | Vùng nhớ đệm có sẵn theo hướng khác trên kết nối này. |
 Urgent | Cho biết có dữ liệu khẩn cấp trong gói tin. |
 
-##### b. Bắt `n` gói tin với tùy chọn `-c`
+##### c. Bắt `n` gói tin với tùy chọn `-c`
 
 Mặc định, `tcpdump` sẽ bắt liên tiếp các gói tin. Để dừng quá trình này, chúng ta phải thao tác tổ hợp phím `Ctrl` + `C`.
 Nhưng với tùy chọn `-c`, chúng ta có thể chỉ cho `tcpdump` biết là "Tôi chỉ muốn bắt n gói." Cú pháp như sau:
@@ -75,4 +81,57 @@ tcpdump -c n -i enp0s3
 
 <img src="http://i.imgur.com/DQPc561.png" />
 
-##### c. 
+##### d. Lưu file .pcap (Wireshark)
+
+```
+tcpdump -i enp0s3 -w /opt/capture.pcap
+
+tcpdump: listening on eth0, link-type EN10MB (Ethernet), capture size 65535 bytes
+4 packets captured
+4 packets received by filter
+0 packets dropped by kernel
+```
+
+##### d. Đọc file .pcap
+
+<img src="http://i.imgur.com/5GQqbk8.png" />
+
+##### e. Chỉ bắt các gói TCP
+
+```
+tcpdump -i enp0s3 tcp -c 5
+```
+
+<img src="http://i.imgur.com/Ss1KjwU.png" />
+
+Ngoài TCP, chúng ta có thể bắt theo UDP, IMCP,...
+
+##### f. Bắt các gói theo `port`
+
+
+```
+tcpdump -i enp0s3 port 22 -c 5 -n
+```
+
+- `-n`: Hiển thị số port thay cho tên giao thức, IP thay cho Hostname
+
+<img src="http://i.imgur.com/mLX6QIi.png" />
+
+##### g. Bắt theo địa chỉ nguồn hoặc đích
+
+Địa chỉ nguồn: 
+
+```
+ tcpdump -i emp0s3 src 192.168.100.1
+```
+
+Địa chỉ đích: 
+
+```
+ tcpdump -i emp0s3 dst 192.168.100.1
+```
+
+#### 4. THAM KHẢO
+
+- https://vinahost.vn/ac/knowledgebase/248/TCPDUMP-va-cac-th-thut-s-dng.html
+- http://www.tecmint.com/12-tcpdump-commands-a-network-sniffer-tool/
